@@ -1,4 +1,4 @@
-# Leaning Loop Back
+# Learning Loop Back
 
 ## About
 
@@ -34,12 +34,21 @@ This is the first step in the tutorial. Its about a simple API with 1 model, thi
 * Press entender to accept the default plural name to the model 
 * Use common model to be used in both sides (server and client)
 * Define the model properties  
-* Type "node  . " in cmd to run the program
+* Type "node  . " in root file to run the program
 
 
+### Version 2: Use API explorer
+We just have made a REST API in the previous step. So, now we goint to explorer the LoopBack tools. 
 
+LoopBack provide us `API Explorer`, who is a document of our API. It can be checked after running the next command in root folder:
+> node .
 
-### Installation errors
+Then, go to the following link:
+> http://localhost:3000/explorer/
+
+You will found yours modals and his end points. Also, if you clicked into an specific end point, it show you details like an example of the return value, the data type, parameters, and so on. 
+
+## Installation errors
 
 #### cannot open input file 'C:\OpenSSL-Win64\lib\libeay 32.lib'
 
