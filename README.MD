@@ -1,14 +1,24 @@
 # Learning Loop Back
 
+
+## Index
+* About
+* Main goal
+* Install
+* Tags
+* Installation errors
+
+
 ## About
 
 
 ## Main goal
 > get familiary with Loop back
+---
 
 ## Install 
 > npm install -g loopback-cli
-
+----
 ## Tags
 
 ### Version 0
@@ -116,9 +126,89 @@ module.exports = function(app) {
 
 It will generate test data any time the serevr is up
 
+More information can be found here: https://loopback.io/doc/en/lb3/Connect-your-API-to-a-data-source.html
+
+### Version 4: Extend the API
+
+You can add others end points at the API with your own validation if you want. For that, you have to open your model name js file in *common/models*. Then you have to write your end point with the respective validation and others details like name and params and so on. 
+
+for example:
+
+```
+module.exports = function(CoffeeShop) {
+  CoffeeShop.status = function(cb) {
+    var currentDate = new Date();
+    var currentHour = currentDate.getHours();
+    var OPEN_HOUR = 6;
+    var CLOSE_HOUR = 20;
+    console.log('Current hour is %d', currentHour);
+    var response;
+    if (currentHour >= OPEN_HOUR && currentHour < CLOSE_HOUR) {
+      response = 'We are open for business.';
+    } else {
+      response = 'Sorry, we are closed. Open daily from 6am to 8pm.';
+    }
+    cb(null, response);
+  };
+  CoffeeShop.remoteMethod(
+    'status', {
+      http: {
+        path: '/status',
+        verb: 'get'
+      },
+      returns: {
+        arg: 'status',
+        type: 'string'
+      }
+    }
+  );
+};
+```
+
+More information can be found in: https://loopback.io/doc/en/lb3/Extend-your-API.html
+
+### Version 5: Add a static web page
+
+You can add a static web page to the API with the help of Middlewares. 
+
+Middlewares are nothing but a simply javascript fuction with access to the HTTP request object, HTTP response object and the next middleware to be execute in the request-response cycle.  
+
+Middlewares can:
+* Execute any code
+* Make changes to the request and response objects
+* End the request-response cycle
+* Call the next middleware in the stack
+
+LoopBack use LoopBack Middleware, which are the habituals middleware but with the 'phase' concept added with the intention of managment the execute order easily. 
+
+To add a static web page for our app, we have to do 3 things:
+* Delete or rename with any other extension the file *boot/root.js*
+* Define static middleware
+* Create a static web page
+
+The way we define static middleware is adding 
+```
+...
+"files": {
+  "loopback#static": {
+    "params": "$!../client" 
+  }
+},
+...
+```
+in the json at *server/middleware.json* file
+
+Then, we create a simple hmlt file in client and called it *index*
+
+more information can be found in : https://loopback.io/doc/en/lb3/Add-a-static-web-page.html
+
+---
 
 ## Installation errors
 
 #### cannot open input file 'C:\OpenSSL-Win64\lib\libeay 32.lib'
 
 In windows, this error is solved dwonloding C:\OpenSSL-Win32\lib folder from here (https://github.com/ReadyTalk/win32/blob/master/msvc/lib/libeay32.lib) and add it to C:\OpenSSL-win64\lib folder
+
+---
+
