@@ -186,7 +186,9 @@ To add a static web page for our app, we have to do 3 things:
 * Define static middleware
 * Create a static web page
 
-The way we define static middleware is adding 
+We have to delete or rename this file because if not, this file will execute first when server up.
+
+In other way, the way we define static middleware is adding 
 ```
 ...
 "files": {
@@ -202,6 +204,24 @@ Then, we create a simple hmlt file in client and called it *index*
 
 more information can be found in : https://loopback.io/doc/en/lb3/Add-a-static-web-page.html
 
+### Version 6: Add a custom Express route
+
+LoopBack applications can easily do all the things that an Express app can, if you are familiar with Express, you can add custom routes and make LoopBack easir to learn and use fot you.
+
+For that, you need to go to */server/boot* folder, where boots scripts are host. Its important to have in mind than they execute in alphabetical order when the application starts. In that folder, create a new file called *routes.js* and add the following code:
+
+```
+module.exports = function(app) {
+  // Install a "/ping" route that returns "pong"
+  app.get('/ping', function(req, res) {
+    res.send('pong');
+  });
+}
+```
+
+More information can be found in: https://loopback.io/doc/en/lb3/Add-a-custom-Express-route.html
+
+
 ---
 
 ## Installation errors
@@ -211,4 +231,10 @@ more information can be found in : https://loopback.io/doc/en/lb3/Add-a-static-w
 In windows, this error is solved dwonloding C:\OpenSSL-Win32\lib folder from here (https://github.com/ReadyTalk/win32/blob/master/msvc/lib/libeay32.lib) and add it to C:\OpenSSL-win64\lib folder
 
 ---
+
+## Docker commands for windows
+
+* docker ps -a : show all the containers in docker 
+* docker start [container-name] : start the selected container
+
 
