@@ -232,9 +232,19 @@ In windows, this error is solved dwonloding C:\OpenSSL-Win32\lib folder from her
 
 ---
 
-## Docker commands for windows
+## Others things learned
+
+### Docker commands for windows
 
 * docker ps -a : show all the containers in docker 
 * docker start [container-name] : start the selected container
+
+### Tags in git 
+
+* creates tag: git tag -a [tag's-name] -m "[messange]" 
+* deletes tag: git tag -d [tag's-name]
+* push tags to remote: git push origin [tag's-name]
+
+---
 
 
